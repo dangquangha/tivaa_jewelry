@@ -24,8 +24,8 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "81:80"
-      - "444:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3307:3306"
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: tivaa_jewelry
       MYSQL_ROOT_PASSWORD: quangha2611
@@ -61,7 +61,7 @@ services:
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8081:80
+      - 8080:80
     networks:
       - tivaa-network
 
