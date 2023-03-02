@@ -39,7 +39,14 @@
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
-                        <p>Widgets</p>
+                        <p>Sản phẩm</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('get.providers') }}" class="nav-link">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>Nhà phân phối</p>
                     </a>
                 </li>
             </ul>

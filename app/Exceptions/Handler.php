@@ -38,4 +38,22 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if($this->isHttpException($e)) {
+            switch ($e->getStatusCode()) {
+                case 404:
+                    return redirect()->route('get.dashboard');
+                break;
+
+                default:
+                    return $this->renderHttpException($e);
+                break;
+            }
+        }
+        else {
+            return parent::render($request, $e);
+        }
+    }
 }
