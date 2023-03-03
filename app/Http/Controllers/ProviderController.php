@@ -19,7 +19,7 @@ class ProviderController extends Controller
             $providers = $providers->where('id', $request->id);
         }
         
-        $providers = $providers->paginate(10);
+        $providers = $providers->orderBy('id', 'desc')->paginate(10);
         $viewData = [
             'providers' => $providers
         ];
@@ -83,7 +83,7 @@ class ProviderController extends Controller
         return redirect()->route('get.providers');
     }
 
-    public function delete($id)
+    public function delete($id, Request $request)
     {
         Provider::where('id', $id)->delete();
 

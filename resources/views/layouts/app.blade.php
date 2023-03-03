@@ -22,7 +22,7 @@
 
         @include('components.sidebar')
         
-        <div class="content-wrapper">
+        <div class="content-wrapper pb-3">
             @yield('content')
         </div>
 

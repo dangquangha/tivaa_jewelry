@@ -37,7 +37,14 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('get.dashboard') }}" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('get.products') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Sản phẩm</p>
                     </a>
@@ -47,6 +54,13 @@
                     <a href="{{ route('get.providers') }}" class="nav-link">
                         <i class="nav-icon fas fa-truck"></i>
                         <p>Nhà phân phối</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('get.categories') }}" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>Danh mục</p>
                     </a>
                 </li>
             </ul>
