@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Danh mục</label>
+                    <label>Danh mục <span class="text-danger">(*)</span></label>
                     <select class="form-control" name="category">
                         <option value="">Chọn danh mục</option>
                         @foreach($categories as $category)
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nhà cung cấp <span class="text-danger">(*)</span></label>
+                    <label>Nhà cung cấp</label>
                     <select class="form-control" name="provider">
                         <option value="">Chọn nhà cung cấp</option>
                         @foreach($providers as $provider)
