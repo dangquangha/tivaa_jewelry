@@ -67,7 +67,7 @@ class ProductController extends Controller
         ]);
 
         if (!$request->code) {
-            $category = Category::where('id', $request->category)->first()->code;
+            $category = Category::where('id', $request->category)->first();
             if (!$category) {
                 $request->session()->put('fail', true);
                 return redirect()->route('get.products');
