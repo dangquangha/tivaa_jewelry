@@ -70,7 +70,7 @@
                     </select>
                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
 
-                    <a href="{{ route('get.providers.create') }}" class="btn btn-success" style="margin-left: auto">
+                    <a href="{{ route('get.products.create') }}" class="btn btn-success" style="margin-left: auto">
                         Tạo mới
                     </a>
                 </div>
