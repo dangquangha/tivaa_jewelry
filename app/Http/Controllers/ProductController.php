@@ -74,7 +74,7 @@ class ProductController extends Controller
             }
             $preCode = $category->code;
             $countProduct = Product::where('category_id', $request->category)->count() + 1;
-            $request->code = $preCode + $countProduct;
+            $request->code = $preCode . $countProduct;
         }
 
         Product::create([
