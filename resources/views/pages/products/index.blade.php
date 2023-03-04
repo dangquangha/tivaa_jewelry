@@ -93,7 +93,9 @@
                     @foreach ($products as $product)
                         <tr>
                             <th>{{ $product->id }}</th>
-                            <th>{{ $product->image }}</th>
+                            <th>
+                                <img src="{{ $product->image_url }}" alt="" style="height: 70px" loading="lazy">
+                            </th>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->category ? $product->category->name : '---' }}</td>

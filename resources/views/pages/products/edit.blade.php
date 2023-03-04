@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Cập nhật ản phẩm')
+@section('title', 'Cập nhật sản phẩm')
 
 @section('content')
     <div class="content-header">
@@ -24,7 +24,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form class="w-50" action="{{ route('post.products.update', ['id' => $product->id]) }}" method="POST">
+            <form class="w-50" action="{{ route('post.products.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Tên sản phẩm</label>
@@ -41,7 +41,11 @@
 
                 <div class="form-group">
                     <label>Ảnh sản phẩm</label>
-                    <input type="file" name="image" style="display: block">
+                    <input type="file" name="image" style="display: block" id="image">
+                    @error('image')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                    <img id="preview-image" src="{{ $product->image_url }}" class="mt-1" style="max-height: 100px"/>
                 </div>
 
                 <div class="form-group">
@@ -92,4 +96,15 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $('#image').change(function () {
+            const [file] = document.getElementById('image').files
+            if (file) {
+                $('#preview-image').attr('src', URL.createObjectURL(file)); 
+            }
+        })
+    </script>
 @endsection

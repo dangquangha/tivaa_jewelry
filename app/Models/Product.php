@@ -31,4 +31,9 @@ class Product extends Model
     {
         return $this->belongsTo(Provider::class, 'provider_id', 'id');
     }
+
+    public function getImageUrlAttribute()
+    {
+        return config('filesystems.disks.s3.url') . 'images/' . $this->image;
+    }
 }

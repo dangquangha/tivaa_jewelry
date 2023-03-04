@@ -24,7 +24,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form class="w-50" action="{{ route('post.products.store') }}" method="POST">
+            <form class="w-50" action="{{ route('post.products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Tên sản phẩm</label>
@@ -41,8 +41,13 @@
 
                 <div class="form-group">
                     <label>Ảnh sản phẩm</label>
-                    <input type="file" name="image" value="{{ old('image') }}" style="display: block">
+                    <input type="file" name="image" value="{{ old('image') }}" style="display: block" id="image">
+                    @error('image')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                    <img id="preview-image" class="mt-1" style="max-height: 100px"/>
                 </div>
+                
 
                 <div class="form-group">
                     <label>Danh mục <span class="text-danger">(*)</span></label>
@@ -92,4 +97,15 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $('#image').change(function () {
+            const [file] = document.getElementById('image').files
+            if (file) {
+                $('#preview-image').attr('src', URL.createObjectURL(file)); 
+            }
+        })
+    </script>
 @endsection
