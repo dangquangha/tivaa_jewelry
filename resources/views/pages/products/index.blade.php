@@ -75,6 +75,9 @@
                     </a>
                 </div>
             </form>
+            <p class="text-danger">
+                Để có thể xem chi tiết hình ảnh sản phẩm vui lòng vào <a href="https://drive.google.com/drive/folders/1ZJkACx1mL900ScEE-VzaVCmieE7oR5ci">Link</a> rồi tìm kiếm theo thư mục và mã sản phẩm
+            </p> 
             <table class="table table-bordered table-hover" style="background: #fff">
                 <thead>
                     <tr>
