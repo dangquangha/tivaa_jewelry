@@ -36,29 +36,34 @@
                     </ul>
                 </li> --}}
 
+                @php
+                    $route = \Request::route()->getName();
+                    $route = explode('.', $route);
+                @endphp
+
                 <li class="nav-item">
-                    <a href="{{ route('get.dashboard') }}" class="nav-link">
+                    <a href="{{ route('get.dashboard') }}" class="nav-link {{ $route[1] == 'dashboard' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('get.products') }}" class="nav-link">
+                    <a href="{{ route('get.products') }}" class="nav-link {{ $route[1] == 'products' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>Sản phẩm</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('get.providers') }}" class="nav-link">
+                    <a href="{{ route('get.providers') }}" class="nav-link {{ $route[1] == 'providers' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-truck"></i>
                         <p>Nhà phân phối</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('get.categories') }}" class="nav-link">
+                    <a href="{{ route('get.categories') }}" class="nav-link {{ $route[1] == 'categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>Danh mục</p>
                     </a>

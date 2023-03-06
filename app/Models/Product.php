@@ -34,6 +34,14 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
-        return config('filesystems.disks.s3.url') . 'images/' . $this->image;
+        if (!$this->image) {
+            return null;
+        }
+        $image = $this->image;
+        $year = substr($image, 0, 4);
+        $month = substr($image, 4, 2);
+        $day = substr($image, 6, 2);
+        
+        return config('filesystems.disks.s3.url') . "images/$year/$month/$day/" . $image;
     }
 }

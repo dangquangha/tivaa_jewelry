@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class ImageUploadService
 {
     public function uploadImage($image, $folder = 'images')
     {
-        $imageName = time().'.'.$image->extension();  
+        $imageName = date('Y') . date('m') . date('d') . md5(time()) . '.' . $image->extension();  
+        $imageResize = Image::make($image)->resize(160, 160)->encode($image->extension());
         
-        $path = Storage::disk('s3')->put($folder . '/' . $imageName, file_get_contents($image));
+        $fullFath = $folder . '/' . date('Y') . '/' . date('m') . '/' . date('d') . '/' . $imageName;
+        $path = Storage::disk('s3')->put($fullFath, (string)$imageResize);
         $path = Storage::disk('s3')->url($path);
         
         if ($path) {
