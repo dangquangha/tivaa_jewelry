@@ -54,7 +54,7 @@
                         <th scope="col" width="20%">Số điện thoại</th>
                         <th scope="col" width="25%">Địa chỉ</th>
                         <th scope="col" width="20%">Ghi chú</th>
-                        <th scope="col" width="10%">Hàng động</th>
+                        <th scope="col" width="10%">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>

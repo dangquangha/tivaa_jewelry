@@ -52,7 +52,7 @@
                         <th scope="col" width="10%">ID</th>
                         <th scope="col" width="40%">Tên</th>
                         <th scope="col" width="40%">Mã danh mục</th>
-                        <th scope="col" width="10%">Hàng động</th>
+                        <th scope="col" width="10%">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>

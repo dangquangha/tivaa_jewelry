@@ -1,0 +1,14 @@
+.row-product {
+    .delete-row-product {
+        display: flex;
+        align-items: center;
+
+        i {
+            cursor: pointer;
+
+            &:hover {
+                color: red;
+            }
+        }
+    }
+}

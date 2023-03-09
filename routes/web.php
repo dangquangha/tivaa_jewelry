@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +48,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit/{id}', [ProductController::class, 'edit'])->name('get.products.edit');
         Route::post('update/{id}', [ProductController::class, 'update'])->name('post.products.update');
         Route::post('delete/{id}', [ProductController::class, 'delete'])->name('post.products.delete');
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('get.orders');
+        Route::get('create', [OrderController::class, 'create'])->name('get.orders.create');
+        Route::post('store', [OrderController::class, 'store'])->name('post.orders.store');
+        Route::get('edit/{id}', [OrderController::class, 'edit'])->name('get.orders.edit');
+        // Route::post('update/{id}', [ProductController::class, 'update'])->name('post.products.update');
+        Route::get('show/{id}', [OrderController::class, 'show'])->name('get.orders.show');
     });
 });

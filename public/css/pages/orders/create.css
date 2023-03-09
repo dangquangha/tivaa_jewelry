@@ -1,0 +1,10 @@
+.row-product .delete-row-product {
+  display: flex;
+  align-items: center;
+}
+.row-product .delete-row-product i {
+  cursor: pointer;
+}
+.row-product .delete-row-product i:hover {
+  color: red;
+}

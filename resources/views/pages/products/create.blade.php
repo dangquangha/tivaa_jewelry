@@ -47,7 +47,6 @@
                     @enderror
                     <img id="preview-image" class="mt-1" style="max-height: 100px"/>
                 </div>
-                
 
                 <div class="form-group">
                     <label>Danh mục <span class="text-danger">(*)</span></label>

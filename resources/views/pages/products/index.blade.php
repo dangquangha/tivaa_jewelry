@@ -89,7 +89,7 @@
                         <th scope="col" width="12.5%">Nguồn</th>
                         <th scope="col" width="10%">Giá nhập</th>
                         <th scope="col" width="10%">Giá bán</th>
-                        <th scope="col" width="10%">Hàng động</th>
+                        <th scope="col" width="10%">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -68,6 +68,13 @@
                         <p>Danh mục</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('get.orders') }}" class="nav-link {{ $route[1] == 'orders' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>Đơn hàng</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
