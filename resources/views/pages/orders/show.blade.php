@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Cập nhật đơn hàng')
+@section('title', 'Chi tiết đơn hàng')
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/pages/orders/create.css') }}"/>
