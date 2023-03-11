@@ -132,7 +132,7 @@
             </table>
 
             <div class="d-flex justify-content-end">
-                {{ $orders->links() }}
+                {{ $orders->appends(request()->input())->links() }}
             </div>
         </div>
     </section>

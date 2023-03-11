@@ -84,7 +84,7 @@
             </table>
 
             <div class="d-flex justify-content-end">
-                {{ $providers->links() }}
+                {{ $providers->appends(request()->input())->links() }}
             </div>
         </div>
     </section>

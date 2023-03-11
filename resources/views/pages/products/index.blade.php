@@ -120,7 +120,7 @@
             </table>
 
             <div class="d-flex justify-content-end">
-                {{ $products->links() }}
+                {{ $products->appends(request()->input())->links() }}
             </div>
         </div>
     </section>

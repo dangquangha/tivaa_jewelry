@@ -80,7 +80,7 @@
             </table>
 
             <div class="d-flex justify-content-end">
-                {{ $categories->links() }}
+                {{ $categories->appends(request()->input())->links() }}
             </div>
         </div>
     </section>
