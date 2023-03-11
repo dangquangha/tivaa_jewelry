@@ -65,7 +65,7 @@ class OrderController extends Controller
                 'address' => $request->address,
                 'type' => $request->type,
                 'status' => $request->status,
-                'discount' => $request->discount,
+                'discount' => $request->discount ?? 0,
                 'note' => $request->note,
             ]);
 
@@ -134,7 +134,7 @@ class OrderController extends Controller
                 $order->address = $request->address;
                 $order->type = $request->type;
                 $order->status = $request->status;
-                $order->discount = $request->discount;
+                $order->discount = $request->discount ?? 0;
                 $order->note = $request->note;
                 $order->save();
     
