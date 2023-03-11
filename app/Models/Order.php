@@ -34,6 +34,7 @@ class Order extends Model
         'address',
         'type',
         'status',
+        'discount',
         'note'
     ];
 

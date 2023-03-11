@@ -82,7 +82,6 @@
                 <thead>
                     <tr>
                         <th scope="col" width="5%">ID</th>
-                        <th scope="col" width="15%">Ảnh</th>
                         <th scope="col" width="15%">Tên</th>
                         <th scope="col" width="10%">Mã</th>
                         <th scope="col" width="12.5%">Loại</th>
@@ -96,9 +95,6 @@
                     @foreach ($products as $product)
                         <tr>
                             <th>{{ $product->id }}</th>
-                            <th>
-                                <img src="{{ $product->image_url }}" alt="" style="height: 70px" loading="lazy">
-                            </th>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->category ? $product->category->name : '---' }}</td>

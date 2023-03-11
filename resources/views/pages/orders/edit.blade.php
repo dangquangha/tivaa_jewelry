@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Thêm mới đơn hàng')
+@section('title', 'Cập nhật đơn hàng')
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/pages/orders/create.css') }}"/>
@@ -19,20 +19,24 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('get.orders') }}">Đơn hàng</a>
                         </li>
-                        <li class="breadcrumb-item active">Tạo mới</li>
+                        <li class="breadcrumb-item active">Cập nhật</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
+    @php
+        $orderModel = new App\Models\Order();
+        $statusValid = $orderModel::STATUS_PREPARE;
+    @endphp
     <section class="content">
         <div class="container-fluid">
-            <form class="w-50" action="{{ route('post.orders.store') }}" method="POST">
+            <form class="w-50" action="{{ route('post.orders.update', ['id' => $order->id]) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label>Tên khách hàng <span class="text-danger">(*)</span></label>
-                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    <input type="text" class="form-control" name="name" value="{{ $order->name }}" {{ $order->status == $statusValid ? '' : 'disabled' }}>
                     @error('name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -40,7 +44,7 @@
 
                 <div class="form-group">
                     <label>Số điện thoại <span class="text-danger">(*)</span></label>
-                    <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+                    <input type="text" class="form-control" name="phone" value="{{ $order->phone }}" {{ $order->status == $statusValid ? '' : 'disabled' }}>
                     @error('phone')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -48,7 +52,7 @@
 
                 <div class="form-group">
                     <label>Địa chỉ <span class="text-danger">(*)</span></label>
-                    <input type="text" class="form-control" name="address" value="{{ old('address') }}">
+                    <input type="text" class="form-control" name="address" value="{{ $order->address }}" {{ $order->status == $statusValid ? '' : 'disabled' }}>
                     @error('address')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -57,39 +61,38 @@
                 <div class="mb-3 list-row-product">
                     <div style="display: flex; align-items: center" class="mb-2">
                         <label class="mb-0">Sản phẩm</label>
-                        <button class="btn btn-success btn-sm ml-2 add-row-product" type="button">
+                        <button class="btn btn-success btn-sm ml-2 add-row-product" type="button" {{ $order->status == $statusValid ? '' : 'disabled' }}>
                             Thêm <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    <div class="form-row row-product">
-                        <div class="col-sm-3 my-1">
-                            <input type="text" class="form-control" name="product_codes[]" placeholder="Mã sản phẩm" required>
+                    @foreach ($order->orderProducts as $orderProduct)
+                        <div class="form-row row-product">
+                            <div class="col-sm-3 my-1">
+                                <input type="text" class="form-control" name="product_codes[]" placeholder="Mã sản phẩm" value="{{ $orderProduct->product->code }}" {{ $order->status == $statusValid ? '' : 'disabled' }} required>
+                            </div>
+                            <div class="col-sm-3 my-1">
+                                <input type="number" min="1" class="form-control" name="product_quantitys[]" value="{{ $orderProduct->quantity }}" placeholder="Số lượng" {{ $order->status == $statusValid ? '' : 'disabled' }} required>
+                            </div>
+                            <div class="col-sm-2 my-1 delete-row-product d-none">
+                                <i class="fas fa-trash"></i>
+                            </div>
                         </div>
-                        <div class="col-sm-3 my-1">
-                            <input type="number" min="1" class="form-control" name="product_quantitys[]" placeholder="Số lượng" required>
-                        </div>
-                        <div class="col-sm-2 my-1 delete-row-product d-none">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="form-group">
                     <label>Giảm giá </label>
-                    <input type="number" class="form-control" name="discount" value="{{ old('discount') }}" min="0" placeholder="Giảm giá">
+                    <input type="number" class="form-control" name="discount" value="{{ $order->discount }}" {{ $order->status == $statusValid ? '' : 'disabled' }} min="0" placeholder="Giảm giá">
                     @error('discount')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                @php
-                    $order = new App\Models\Order();
-                @endphp
                 <div class="form-group">
                     <label>Kiểu đơn hàng </label>
-                    <select class="form-control" name="type">
-                        <option value="{{ $order::TYPE_SHIP_COD }}">
-                            {{ $order::TYPE_TEXT[$order::TYPE_SHIP_COD] }}
+                    <select class="form-control" name="type" {{  $order->status == $statusValid ? '' : 'disabled' }}>
+                        <option value="{{ $orderModel::TYPE_SHIP_COD }}">
+                            {{ $orderModel::TYPE_TEXT[$order::TYPE_SHIP_COD] }}
                         </option>
                     </select>
                 </div>
@@ -97,14 +100,16 @@
                 <div class="form-group">
                     <label>Trạng thái </label>
                     <select class="form-control" name="status">
-                        <option value="{{ $order::STATUS_PREPARE }}" selected>
-                            {{ $order::STATUS_TEXT[$order::STATUS_PREPARE] }}
-                        </option>
+                        @foreach ($orderModel::STATUS_TEXT as $key => $status)
+                            <option value="{{ $key }}" {{ $key == $order->status ? 'selected' : '' }}>
+                                {{ $status }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Tạo</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
             </form>
         </div>

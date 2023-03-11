@@ -63,7 +63,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'image' => 'required',
             'category' => 'required',
             'code' => 'unique:products'
         ]);
@@ -79,12 +78,9 @@ class ProductController extends Controller
             $request->code = $preCode . $countProduct;
         }
 
-        $image = (new ImageUploadService())->uploadImage($request->file('image'));
-
         Product::create([
             'name' => $request->name,
             'code' => $request->code,
-            'image' => $image,
             'category_id' => $request->category,
             'provider_id' => $request->provider,
             'price_buy' => $request->price_buy,
@@ -144,10 +140,6 @@ class ProductController extends Controller
             'price_sale' => $request->price_sale,
             'note' => $request->note
         ];
-        if ($request->hasFile('image')) {
-            $image = (new ImageUploadService())->uploadImage($request->file('image'));
-            $dataUpdate['image'] = $image;
-        }
         Product::where('id', $id)->update($dataUpdate);
 
         $request->session()->put('success', true);

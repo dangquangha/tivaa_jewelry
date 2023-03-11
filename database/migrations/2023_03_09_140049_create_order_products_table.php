@@ -17,6 +17,8 @@ class CreateOrderProductsTable extends Migration
             $table->id();
             $table->integer('order_id');
             $table->integer('product_id');
+            $table->integer('price_buy');
+            $table->integer('price_sale');
             $table->integer('quantity');
             $table->softDeletes();
             $table->timestamps();

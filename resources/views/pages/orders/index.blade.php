@@ -58,7 +58,7 @@
                     <select class="form-control mr-2" name="type">
                         <option value="">Loại</option>
                         @foreach($type as $key => $t)
-                            <option value="{{ $key }}" {!! request()->get('type') && request()->get('type') == $key ? 'selected' : '' !!}>
+                            <option value="{{ $key }}" {!! request()->get('type') == $key ? 'selected' : '' !!}>
                                 {{ $t }}
                             </option>
                         @endforeach
@@ -66,7 +66,7 @@
                     <select class="form-control mr-2" name="status">
                         <option value="">Trạng thái</option>
                         @foreach($status as $key => $s)
-                            <option value="{{ $key }}" {!! request()->get('status') && request()->get('status') == $key ? 'selected' : '' !!}>
+                            <option value="{{ $key }}" {!! request()->get('status') == $key ? 'selected' : '' !!}>
                                 {{ $s }}
                             </option>
                         @endforeach
@@ -82,12 +82,13 @@
                 <thead>
                     <tr>
                         <th scope="col" width="4%">ID</th>
-                        <th scope="col" width="8%">Code</th>
-                        <th scope="col" width="12.5%">Tên khách</th>
-                        <th scope="col" width="12.5%">SĐT</th>
-                        <th scope="col" width="25%">Địa chỉ</th>
-                        <th scope="col" width="10%">Tổng tiền</th>
-                        <th scope="col" width="9%">Loại</th>
+                        <th scope="col" width="7%">Code</th>
+                        <th scope="col" width="11.5%">Tên khách</th>
+                        <th scope="col" width="11.5%">SĐT</th>
+                        <th scope="col" width="18%">Địa chỉ</th>
+                        <th scope="col" width="8%">Tổng tiền</th>
+                        <th scope="col" width="8%">Lợi nhuận</th>
+                        <th scope="col" width="8%">Loại</th>
                         <th scope="col" width="9%">Trạng thái</th>
                         <th scope="col" width="10%">Hành động</th>
                     </tr>
@@ -96,10 +97,13 @@
                     @foreach ($orders as $order)
                         @php
                             $total = 0;
+                            $profit = 0;
                             foreach ($order->orderProducts as $orderProduct) {
-                                $product = $orderProduct->product; 
-                                $total += $product ? $product->price_sale * $orderProduct->quantity : 0;
+                                $total += $orderProduct->price_sale * $orderProduct->quantity;
+                                $profit += ($orderProduct->price_sale - $orderProduct->price_buy) * $orderProduct->quantity;
                             }
+                            $total -= $order->discount;
+                            $profit -= $order->discount;
                         @endphp
                         <tr>
                             <td>{{ $order->id }}</th>
@@ -108,6 +112,7 @@
                             <td>{{ $order->phone }}</td>
                             <td>{{ $order->address }}</td>
                             <td>{{ number_format($total) }}</td>
+                            <td>{{ number_format($profit) }}</td>
                             <td>{{ $type[$order->type] }}</td>
                             <td>{{ $status[$order->status] }}</td>
                             <td>
