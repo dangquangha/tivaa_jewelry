@@ -21,7 +21,7 @@ class ProductController extends Controller
         }
 
         if ($request->code) {
-            $products->where('code', 'like', '%' . $request->code . '%');
+            $products->where('code', 'like', '%' . mb_strtoupper($request->code) . '%');
         }
 
         if ($request->id) {
