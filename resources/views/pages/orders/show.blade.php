@@ -61,6 +61,11 @@
                     <label class="label-w-200">Trạng thái: </label> <span>{{ $orderModel::STATUS_TEXT[$order->status] }}</span>
                 </div>
 
+                <div class="form-group" style="display: flex; justify-content: space-between">
+                    <label class="label-w-200">Ghi chú: </label> 
+                    <p style="width: calc(100% - 200px)">{{ $order->note ?? 'Không có ghi chú nào' }}</p>
+                </div>
+
                 <div class="mb-3 list-row-product">
                     <div style="display: flex; align-items: center" class="mb-2">
                         <label class="mb-0">Chi tiết hóa đơn: </label>

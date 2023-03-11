@@ -103,6 +103,11 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <textarea class="form-control" rows="3" name="note">{{ old('note') }}</textarea>
+                </div>
+
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary">Tạo</button>
                 </div>
