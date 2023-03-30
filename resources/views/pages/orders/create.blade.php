@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <label>Phí phát sinh </label>
                     <input type="number" class="form-control" name="costs_incurred" value="{{ old('costs_incurred') }}" min="0" placeholder="Phí phát sinh">
-                    <small class="form-text text-danger">Tổng các chi phí như ship, vỏ, túi,... Phải ghi rõ ở mục ghi chú</small>
+                    <small class="form-text text-danger">Tổng các chi phí như chịu free ship, hộp, túi,... Phải ghi rõ ở mục ghi chú</small>
                 </div>
 
                 <div class="form-group">
