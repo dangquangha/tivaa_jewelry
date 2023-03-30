@@ -30,7 +30,7 @@ class OrderController extends Controller
             $orders->where('status', $request->status);
         }
 
-        $orders = $orders->paginate(10);
+        $orders = $orders->orderBy('id', 'desc')->paginate(10);
         
         $viewData = [
             'orders' => $orders
