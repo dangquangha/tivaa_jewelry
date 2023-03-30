@@ -91,8 +91,8 @@
                                 $total += $orderProduct->price_sale * $orderProduct->quantity;
                                 $profit += ($orderProduct->price_sale - $orderProduct->price_buy) * $orderProduct->quantity;
                             }
-                            $total = $total + $order->costs_incurred - $order->discount;
-                            $profit = $profit - $order->costs_incurred - $order->discount;
+                            $total = $total + $order->surcharge - $order->discount;
+                            $profit = $profit + $order->surcharge - $order->costs_incurred - $order->discount;
                         @endphp
                         <tr>
                             <td>{{ $order->id }}</th>

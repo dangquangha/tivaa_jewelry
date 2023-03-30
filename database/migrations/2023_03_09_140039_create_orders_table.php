@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->integer('discount')->default(0);
             $table->integer('costs_incurred')->default(0);
+            $table->integer('surcharge')->default(0);
             $table->integer('deposit')->default(0);
             $table->text('note')->nullable();
             $table->softDeletes();

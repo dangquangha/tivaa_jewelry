@@ -55,6 +55,7 @@ class OrderController extends Controller
                 'status' => $request->status,
                 'discount' => $request->discount ?? 0,
                 'costs_incurred' => $request->costs_incurred ?? 0,
+                'surcharge' => $request->surcharge ?? 0,
                 'deposit' => $request->deposit ?? 0,
                 'note' => $request->note,
             ]);
@@ -124,6 +125,7 @@ class OrderController extends Controller
                 $order->status = $request->status;
                 $order->discount = $request->discount ?? 0;
                 $order->costs_incurred = $request->costs_incurred ?? 0;
+                $order->surcharge = $request->surcharge ?? 0;
                 $order->deposit = $request->deposit ?? 0;
                 $order->note = $request->note;
                 $order->save();

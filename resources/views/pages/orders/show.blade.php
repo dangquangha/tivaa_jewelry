@@ -76,6 +76,7 @@
                         <tbody>
                             @php
                                 $total = 0;
+                                $profit = 0;
                             @endphp
                             @foreach ($order->orderProducts as $orderProduct)
                                 <tr>
@@ -87,24 +88,33 @@
                                     <td class="pr-0">{{ number_format($orderProduct->quantity * $orderProduct->price_sale) }}</td>
                                     @php
                                         $total += $orderProduct->quantity * $orderProduct->price_sale;
+                                        $profit += ($orderProduct->price_sale - $orderProduct->price_buy) * $orderProduct->quantity;
                                     @endphp
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="5" class="pl-0"><b>Chi phí phát sinh: </b></td>
+                                <td colspan="5" class="pl-0"><b>Chi phí phát sinh (1): </b></td>
                                 <td colspan="5" class="pr-0">{{ number_format($order->costs_incurred) }}</td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="pl-0"><b>Giảm giá:</b></td>
+                                <td colspan="5" class="pl-0"><b>Phụ phí (2): </b></td>
+                                <td colspan="5" class="pr-0">{{ number_format($order->surcharge) }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="pl-0"><b>Giảm giá (3):</b></td>
                                 <td colspan="5" class="pr-0">{{ number_format($order->discount) }}</td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="pl-0"><b>Đã cọc: </b></td>
+                                <td colspan="5" class="pl-0"><b>Đã cọc (4): </b></td>
                                 <td colspan="5" class="pr-0">{{ number_format($order->deposit) }}</td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="pl-0"><b>Tổng tiền:</b></td>
-                                <td colspan="5" class="pr-0"><b>{{ number_format($total + $order->costs_incurred - $order->discount) }}</b></td>
+                                <td colspan="5" class="pl-0"><b>Tổng tiền + (2) - (3):</b></td>
+                                <td colspan="5" class="pr-0"><b>{{ number_format($total + $order->surcharge - $order->discount) }}</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="pl-0"><b>Lợi nhuận - (1) + (2) - (3):</b></td>
+                                <td colspan="5" class="pr-0"><b>{{ number_format($profit - $order->costs_incurred + $order->surcharge - $order->discount) }}</b></td>
                             </tr>
                         </tbody>
                     </table>

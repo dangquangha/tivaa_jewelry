@@ -87,6 +87,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Phụ phí thu thêm </label>
+                    <input type="number" class="form-control" name="surcharge" value="{{ $order->surcharge }}" min="0" placeholder="Phụ phí">
+                    <small class="form-text text-danger">Tổng các chi phí thu thêm. Nếu phí ship bên thứ 3 khách trả thì không thêm</small>
+                </div>
+
+                <div class="form-group">
                     <label>Đã cọc </label>
                     <input type="number" class="form-control" name="deposit" value="{{ $order->deposit }}" {{ $order->status == $statusValid ? '' : 'disabled' }} min="0" placeholder="Đã cọc">
                 </div>

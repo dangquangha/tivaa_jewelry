@@ -30,6 +30,7 @@ class Order extends Model
         'status',
         'discount',
         'costs_incurred',
+        'surcharge',
         'deposit',
         'note'
     ];

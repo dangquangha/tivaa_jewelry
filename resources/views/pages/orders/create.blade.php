@@ -77,7 +77,13 @@
                 <div class="form-group">
                     <label>Phí phát sinh </label>
                     <input type="number" class="form-control" name="costs_incurred" value="{{ old('costs_incurred') }}" min="0" placeholder="Phí phát sinh">
-                    <small class="form-text text-danger">Tổng các chi phí như chịu free ship, hộp, túi,... Phải ghi rõ ở mục ghi chú</small>
+                    <small class="form-text text-danger">Tổng các chi phí phải chịu như free ship, hộp, túi,... Phải ghi rõ ở mục ghi chú</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Phụ phí thu thêm </label>
+                    <input type="number" class="form-control" name="surcharge" value="{{ old('surcharge') }}" min="0" placeholder="Phụ phí">
+                    <small class="form-text text-danger">Tổng các chi phí thu thêm. Nếu phí ship bên thứ 3 khách trả thì không thêm</small>
                 </div>
 
                 <div class="form-group">
