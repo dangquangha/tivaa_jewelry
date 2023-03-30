@@ -38,10 +38,6 @@
         <div class="container-fluid">
             <form class="w-50">
                 <div class="form-group">
-                    <label class="label-w-200">Mã đơn: </label> <span>{{ $order->code }}</span>
-                </div>
-
-                <div class="form-group">
                     <label class="label-w-200">Tên khách hàng: </label> <span>{{ $order->name }}</span>
                 </div>
 
@@ -54,16 +50,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="label-w-200">Kiểu đơn hàng: </label> <span>{{ $orderModel::TYPE_TEXT[$order->type] }}</span>
-                </div>
-
-                <div class="form-group">
                     <label class="label-w-200">Trạng thái: </label> <span>{{ $orderModel::STATUS_TEXT[$order->status] }}</span>
                 </div>
 
                 <div class="form-group" style="display: flex; justify-content: space-between">
                     <label class="label-w-200">Ghi chú: </label> 
-                    <p style="width: calc(100% - 200px)">{!! nl2br(e($order->note)) ?? 'Không có ghi chú nào' !!}</p>
+                    <p style="width: calc(100% - 200px)">{!! textareaBreakLine($order->note) ?? 'Không có ghi chú nào' !!}</p>
                 </div>
 
                 <div class="mb-3 list-row-product">
@@ -99,12 +91,20 @@
                                 </tr>
                             @endforeach
                             <tr>
+                                <td colspan="5" class="pl-0"><b>Chi phí phát sinh: </b></td>
+                                <td colspan="5" class="pr-0">{{ number_format($order->costs_incurred) }}</td>
+                            </tr>
+                            <tr>
                                 <td colspan="5" class="pl-0"><b>Giảm giá:</b></td>
                                 <td colspan="5" class="pr-0">{{ number_format($order->discount) }}</td>
                             </tr>
                             <tr>
+                                <td colspan="5" class="pl-0"><b>Đã cọc: </b></td>
+                                <td colspan="5" class="pr-0">{{ number_format($order->deposit) }}</td>
+                            </tr>
+                            <tr>
                                 <td colspan="5" class="pl-0"><b>Tổng tiền:</b></td>
-                                <td colspan="5" class="pr-0"><b>{{ number_format($total - $order->discount) }}</b></td>
+                                <td colspan="5" class="pr-0"><b>{{ number_format($total + $order->costs_incurred - $order->discount) }}</b></td>
                             </tr>
                         </tbody>
                     </table>

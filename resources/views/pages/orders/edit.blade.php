@@ -81,20 +81,22 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Phí phát sinh </label>
+                    <input type="number" class="form-control" name="costs_incurred" value="{{ $order->costs_incurred }}" min="0" placeholder="Phí phát sinh">
+                    <small class="form-text text-danger">Tổng các chi phí như ship, vỏ, túi,... Phải ghi rõ ở mục ghi chú</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Đã cọc </label>
+                    <input type="number" class="form-control" name="deposit" value="{{ $order->deposit }}" {{ $order->status == $statusValid ? '' : 'disabled' }} min="0" placeholder="Đã cọc">
+                </div>
+
+                <div class="form-group">
                     <label>Giảm giá </label>
                     <input type="number" class="form-control" name="discount" value="{{ $order->discount }}" {{ $order->status == $statusValid ? '' : 'disabled' }} min="0" placeholder="Giảm giá">
                     @error('discount')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
-                </div>
-
-                <div class="form-group">
-                    <label>Kiểu đơn hàng </label>
-                    <select class="form-control" name="type" {{  $order->status == $statusValid ? '' : 'disabled' }}>
-                        <option value="{{ $orderModel::TYPE_SHIP_COD }}">
-                            {{ $orderModel::TYPE_TEXT[$order::TYPE_SHIP_COD] }}
-                        </option>
-                    </select>
                 </div>
 
                 <div class="form-group">

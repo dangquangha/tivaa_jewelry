@@ -14,16 +14,8 @@ class OrderController extends Controller
     {
         $orders = Order::with(['orderProducts']);
 
-        if (isset($request->code)) {
-            $orders->where('code', $request->code);
-        }
-
         if (isset($request->phone)) {
             $orders->where('phone', $request->phone);
-        }
-
-        if (isset($request->type)) {
-            $orders->where('type', $request->type);
         }
         
         if (isset($request->status)) {
@@ -50,22 +42,20 @@ class OrderController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'type' => 'required',
             'status' => 'required'
         ]);
-        $orderCode = time();
 
         DB::beginTransaction();
         try {
             // Create order
             $order = Order::create([
-                'code' => $orderCode,
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                'type' => $request->type,
                 'status' => $request->status,
                 'discount' => $request->discount ?? 0,
+                'costs_incurred' => $request->costs_incurred ?? 0,
+                'deposit' => $request->deposit ?? 0,
                 'note' => $request->note,
             ]);
 
@@ -125,16 +115,16 @@ class OrderController extends Controller
                     'name' => 'required',
                     'phone' => 'required',
                     'address' => 'required',
-                    'type' => 'required',
                     'status' => 'required'
                 ]);
                 
                 $order->name = $request->name;
                 $order->phone = $request->phone;
                 $order->address = $request->address;
-                $order->type = $request->type;
                 $order->status = $request->status;
                 $order->discount = $request->discount ?? 0;
+                $order->costs_incurred = $request->costs_incurred ?? 0;
+                $order->deposit = $request->deposit ?? 0;
                 $order->note = $request->note;
                 $order->save();
     

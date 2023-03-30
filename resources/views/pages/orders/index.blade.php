@@ -48,21 +48,11 @@
             @endif
 
             @php
-                $type = \App\Models\Order::TYPE_TEXT;
                 $status = \App\Models\Order::STATUS_TEXT;
             @endphp 
             <form action="" class="form-inline mb-3">
                 <div class="form-group w-100">
-                    <input type="text" class="form-control mr-2" placeholder="Mã đơn hàng" name="code" value="{{ request()->get('code') }}">
                     <input type="text" class="form-control mr-2" placeholder="Số điện thoại" name="phone" value="{{ request()->get('phone') }}">
-                    <select class="form-control mr-2" name="type">
-                        <option value="">Loại</option>
-                        @foreach($type as $key => $t)
-                            <option value="{{ $key }}" {!! request()->get('type') == $key ? 'selected' : '' !!}>
-                                {{ $t }}
-                            </option>
-                        @endforeach
-                    </select>
                     <select class="form-control mr-2" name="status">
                         <option value="">Trạng thái</option>
                         @foreach($status as $key => $s)
@@ -81,15 +71,14 @@
             <table class="table table-bordered table-hover" style="background: #fff">
                 <thead>
                     <tr>
-                        <th scope="col" width="4%">ID</th>
-                        <th scope="col" width="7%">Code</th>
-                        <th scope="col" width="11.5%">Tên khách</th>
-                        <th scope="col" width="11.5%">SĐT</th>
-                        <th scope="col" width="18%">Địa chỉ</th>
-                        <th scope="col" width="8%">Tổng tiền</th>
-                        <th scope="col" width="8%">Lợi nhuận</th>
-                        <th scope="col" width="8%">Loại</th>
-                        <th scope="col" width="9%">Trạng thái</th>
+                        <th scope="col" width="5%">ID</th>
+                        <th scope="col" width="12.5%">Tên khách</th>
+                        <th scope="col" width="12.5%">SĐT</th>
+                        <th scope="col" width="20%">Địa chỉ</th>
+                        <th scope="col" width="10%">Tổng tiền</th>
+                        <th scope="col" width="10%">Đã cọc</th>
+                        <th scope="col" width="10%">Lợi nhuận</th>
+                        <th scope="col" width="10%">Trạng thái</th>
                         <th scope="col" width="10%">Hành động</th>
                     </tr>
                 </thead>
@@ -102,18 +91,17 @@
                                 $total += $orderProduct->price_sale * $orderProduct->quantity;
                                 $profit += ($orderProduct->price_sale - $orderProduct->price_buy) * $orderProduct->quantity;
                             }
-                            $total -= $order->discount;
-                            $profit -= $order->discount;
+                            $total = $total + $order->costs_incurred - $order->discount;
+                            $profit = $profit - $order->costs_incurred - $order->discount;
                         @endphp
                         <tr>
                             <td>{{ $order->id }}</th>
-                            <td>{{ $order->code }}</td>
                             <td>{{ $order->name }}</td>
                             <td>{{ $order->phone }}</td>
                             <td>{{ $order->address }}</td>
                             <td>{{ number_format($total) }}</td>
+                            <td>{{ number_format($order->deposit) }}</td>
                             <td>{{ number_format($profit) }}</td>
-                            <td>{{ $type[$order->type] }}</td>
                             <td>{{ $status[$order->status] }}</td>
                             <td>
                                 <div class="d-flex">

@@ -75,6 +75,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Phí phát sinh </label>
+                    <input type="number" class="form-control" name="costs_incurred" value="{{ old('costs_incurred') }}" min="0" placeholder="Phí phát sinh">
+                    <small class="form-text text-danger">Tổng các chi phí như ship, vỏ, túi,... Phải ghi rõ ở mục ghi chú</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Đã cọc </label>
+                    <input type="number" class="form-control" name="deposit" value="{{ old('deposit') }}" min="0" placeholder="Đã cọc">
+                </div>
+
+                <div class="form-group">
                     <label>Giảm giá </label>
                     <input type="number" class="form-control" name="discount" value="{{ old('discount') }}" min="0" placeholder="Giảm giá">
                     @error('discount')
@@ -85,15 +96,6 @@
                 @php
                     $order = new App\Models\Order();
                 @endphp
-                <div class="form-group">
-                    <label>Kiểu đơn hàng </label>
-                    <select class="form-control" name="type">
-                        <option value="{{ $order::TYPE_SHIP_COD }}">
-                            {{ $order::TYPE_TEXT[$order::TYPE_SHIP_COD] }}
-                        </option>
-                    </select>
-                </div>
-
                 <div class="form-group">
                     <label>Trạng thái </label>
                     <select class="form-control" name="status">

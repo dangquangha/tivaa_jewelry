@@ -11,11 +11,6 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const TYPE_SHIP_COD = 0;
-    const TYPE_TEXT = [
-        self::TYPE_SHIP_COD => 'Ship Cod'
-    ];
-
     const STATUS_PREPARE = 0;
     const STATUS_SHIPING = 1;
     const STATUS_DONE = 2;
@@ -28,13 +23,14 @@ class Order extends Model
     ];
 
     protected $fillable = [
-        'code',
         'name',
         'phone',
         'address',
         'type',
         'status',
         'discount',
+        'costs_incurred',
+        'deposit',
         'note'
     ];
 
