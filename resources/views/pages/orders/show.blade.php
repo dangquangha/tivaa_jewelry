@@ -63,7 +63,7 @@
 
                 <div class="form-group" style="display: flex; justify-content: space-between">
                     <label class="label-w-200">Ghi chú: </label> 
-                    <p style="width: calc(100% - 200px)">{{ $order->note ?? 'Không có ghi chú nào' }}</p>
+                    <p style="width: calc(100% - 200px)">{!! nl2br(e($order->note)) ?? 'Không có ghi chú nào' !!}</p>
                 </div>
 
                 <div class="mb-3 list-row-product">
