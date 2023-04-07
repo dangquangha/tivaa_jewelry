@@ -131,26 +131,22 @@ class OrderController extends Controller
                 $order->save();
     
                 // Create order product
-                OrderProduct::where('order_id', $id)->forceDelete();
                 $products = Product::whereIn('code', $request->product_codes)->get();
                 $orderProducts = [];
                 foreach ($request->product_codes as $key => $product_code) {
                     foreach ($products as $product) {
                         if ($product->code == $product_code) {
-                            $orderProducts[] = [
+                            OrderProduct::updateOrCreate([
                                 'order_id' => $id,
                                 'product_id' => $product->id,
+                            ],[
                                 'price_buy' => $product->price_buy,
                                 'price_sale' => $product->price_sale,
                                 'quantity' => $request->product_quantitys[$key],
-                                'created_at' => now(),
-                                'updated_at' => now(),
-                            ];
+                            ]);
                         }
                     }
                 }
-                OrderProduct::insert($orderProducts);
-    
             } else {
                 $order->costs_incurred = $request->costs_incurred ?? 0;
                 $order->surcharge = $request->surcharge ?? 0;
