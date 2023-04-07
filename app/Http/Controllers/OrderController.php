@@ -152,7 +152,10 @@ class OrderController extends Controller
                 OrderProduct::insert($orderProducts);
     
             } else {
+                $order->costs_incurred = $request->costs_incurred ?? 0;
+                $order->surcharge = $request->surcharge ?? 0;
                 $order->status = $request->status;
+                $order->note = $request->note;
                 $order->save();
             }
     
